@@ -7,51 +7,57 @@
     <link rel="manifest" href="manifest.json">
     <style>
         body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            color: white;
             font-family: Arial, sans-serif;
             text-align: center;
-            padding-top: 50px;
-            margin: 0;
         }
-        #status {
-            font-size: 48px;
+        .status {
+            font-size: 36px;
             font-weight: bold;
-            padding: 20px;
-            border-radius: 12px;
-            display: inline-block;
-            color: white;
-            min-width: 200px;
+            margin-bottom: 10px;
+        }
+        .pmi {
+            font-size: 24px;
         }
     </style>
 </head>
 <body>
 
-    <h1>ISM PMI Status</h1>
     <div id="status">Loading...</div>
-    <p id="level">Fetching latest ISM PMI...</p>
+    <div id="pmi">Fetching PMI...</div>
 
     <script>
-        async function fetchPMI() {
-            let pmi = 54.2; 
+        // Example ISM PMI value (replace with API in the future)
+        let ismPmi = 54.2;
 
-            const statusDiv = document.getElementById('status');
-            const levelP = document.getElementById('level');
+        const statusDiv = document.getElementById('status');
+        const pmiDiv = document.getElementById('pmi');
 
+        function updateWidget(pmi) {
             if (pmi < 50) {
-                statusDiv.style.backgroundColor = 'red';
+                document.body.style.backgroundColor = 'red';
                 statusDiv.textContent = 'BEARISH';
             } else if (pmi >= 50 && pmi < 52) {
-                statusDiv.style.backgroundColor = 'yellow';
-                statusDiv.style.color = 'black';
+                document.body.style.backgroundColor = 'yellow';
+                document.body.style.color = 'black';
                 statusDiv.textContent = 'NEUTRAL';
-            } else if (pmi >= 52) {
-                statusDiv.style.backgroundColor = 'green';
+            } else {
+                document.body.style.backgroundColor = 'green';
                 statusDiv.textContent = 'BULLISH';
             }
 
-            levelP.textContent = `Current ISM PMI: ${pmi}`;
+            pmiDiv.textContent = `ISM PMI: ${pmi}`;
         }
 
-        fetchPMI();
+        updateWidget(ismPmi);
     </script>
 
 </body>
