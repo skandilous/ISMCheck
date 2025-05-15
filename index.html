@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISM PMI Widget</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+            margin: 0;
+        }
+        #status {
+            font-size: 48px;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 12px;
+            display: inline-block;
+            color: white;
+            min-width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ISM PMI Status</h1>
+    <div id="status">Loading...</div>
+    <p id="level">Fetching latest ISM PMI...</p>
+
+    <script>
+        async function fetchPMI() {
+            let pmi = 54.2; 
+
+            const statusDiv = document.getElementById('status');
+            const levelP = document.getElementById('level');
+
+            if (pmi < 50) {
+                statusDiv.style.backgroundColor = 'red';
+                statusDiv.textContent = 'BEARISH';
+            } else if (pmi >= 50 && pmi < 52) {
+                statusDiv.style.backgroundColor = 'yellow';
+                statusDiv.style.color = 'black';
+                statusDiv.textContent = 'NEUTRAL';
+            } else if (pmi >= 52) {
+                statusDiv.style.backgroundColor = 'green';
+                statusDiv.textContent = 'BULLISH';
+            }
+
+            levelP.textContent = `Current ISM PMI: ${pmi}`;
+        }
+
+        fetchPMI();
+    </script>
+
+</body>
+</html>
